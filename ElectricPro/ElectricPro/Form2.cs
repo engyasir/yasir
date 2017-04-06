@@ -59,7 +59,7 @@ namespace ElectricPro
             // هذا الايعاز في الاسفل مهم يسهل علينا كتابة العمليات الاربعة من اضافة وحذف ... الخ
             cm = (CurrencyManager)this.BindingContext[Dt];
 
-           
+            cm.Position = Form1.currentPosition;
 
 
         }

@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Frm2));
             this.dgv2 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.dateTimeFoodCardIssuse = new System.Windows.Forms.DateTimePicker();
@@ -87,6 +89,7 @@
             this.btnNew = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btnClose = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgv2)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -440,6 +443,7 @@
             this.dateTimesertfNumber.Name = "dateTimesertfNumber";
             this.dateTimesertfNumber.Size = new System.Drawing.Size(256, 22);
             this.dateTimesertfNumber.TabIndex = 8;
+            this.dateTimesertfNumber.Value = new System.DateTime(2017, 2, 19, 0, 0, 0, 0);
             // 
             // dateTimeCardIssuse
             // 
@@ -456,6 +460,7 @@
             this.dateTimebirth.Name = "dateTimebirth";
             this.dateTimebirth.Size = new System.Drawing.Size(256, 22);
             this.dateTimebirth.TabIndex = 2;
+            this.dateTimebirth.Value = new System.DateTime(2017, 2, 19, 20, 46, 11, 0);
             // 
             // label4
             // 
@@ -767,14 +772,24 @@
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(35, 15);
+            this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClose.ImageIndex = 0;
+            this.btnClose.ImageList = this.imageList1;
+            this.btnClose.Location = new System.Drawing.Point(33, 12);
             this.btnClose.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(132, 25);
+            this.btnClose.Size = new System.Drawing.Size(132, 32);
             this.btnClose.TabIndex = 52;
             this.btnClose.Text = "الرئيسية";
+            this.btnClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "Exterior_48px.png");
             // 
             // Frm2
             // 
@@ -867,5 +882,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.TextBox txtKidsTotal;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

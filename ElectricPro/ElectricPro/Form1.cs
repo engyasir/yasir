@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-
+using System.IO;
+using Microsoft.Office.Interop.Excel;
+using System.Threading;
 
 namespace ElectricPro
 {
@@ -20,15 +22,15 @@ namespace ElectricPro
         // وايضا تعاريف مهمة من البيانات والجدول 
         SqlConnection conn = new SqlConnection("Server=DESKTOP-U9D8BHS\\YASIR;Database=INFOEMP;Integrated Security=True");
         SqlDataAdapter adapter;
-        DataTable Dt = new DataTable("Table_1");
+       System.Data. DataTable Dt = new System.Data.DataTable("Table_1");
         DataSet ds = new DataSet();
         SqlCommandBuilder cmdb;
         CurrencyManager cm;
         public Form1()
         {
             InitializeComponent();
-           
-            adapter = new SqlDataAdapter("select * from Table_1",conn);
+
+            adapter = new SqlDataAdapter("select * from Table_1", conn);
             adapter.Fill(Dt);
             dgv.DataSource = Dt;
 
@@ -55,15 +57,43 @@ namespace ElectricPro
 
         }
 
+        struct DataParameter
+        {
+            public List<Table_1> Table_1list;
+            public string fileName { set; get; }
+
+        }
+        DataParameter _inputParameter;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             //// TODO: This line of code loads data into the 'iNFOEMPDataSet.Table_1' table. You can move, or remove it, as needed.
             // this.table_1TableAdapter.Fill(this.iNFOEMPDataSet.Table_1);
-            
-        }
+            //bindGridview();
+            using (INFOEMPDataSet ds = new INFOEMPDataSet())
+            {
+                table1BindingSource.DataSource = ds.Table_1.ToList();
+            }
 
+            // Begin Load theme
+            if (Properties.Settings.Default.pathOfTheme!="")
+            {
+                skinEngine1.SkinFile = Properties.Settings.Default.pathOfTheme;
+            }
+           
+            
+
+            // Ebd
+
+
+
+
+        }
+      public static  int currentPosition;
         private void button1_Click(object sender, EventArgs e)
         {
+
+            currentPosition = cm.Position;
             var frm = new Frm2();
             frm.Show();
         }
@@ -163,12 +193,113 @@ namespace ElectricPro
 
         private void button3_Click(object sender, EventArgs e)
         {
-            try
+            FRM_THEME frm = new FRM_THEME();
+            frm.ShowDialog();
+            if (Properties.Settings.Default.pathOfTheme != "")
             {
-                this.skinEngine1.SkinFile = "Skins/DiamondPurple.ssk";
-            } catch (Exception ex)
+                skinEngine1.SkinFile = Properties.Settings.Default.pathOfTheme;
+            }
+        }
+
+        private void btnNew_Click_1(object sender, EventArgs e)
+        {
+            // زر تفريغ الخانات وعمل حقل جديد فارغ
+            cm.AddNew();
+            txtIDName.Focus(); 
+        }
+
+        private void btnExelSeave_Click(object sender, EventArgs e)
+        {
+
+            if (backgroundWorker1.IsBusy)
+
+                return;
+            using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel WorkBook |*.xls" })
             {
-                MessageBox.Show(ex.Message);
+                if (sfd.ShowDialog()==DialogResult.OK)
+                {
+                    _inputParameter.fileName = sfd.FileName;
+                    _inputParameter.Table_1list = table1BindingSource.DataSource as List<Table_1>;
+                    progressBar1.Minimum = 0;
+                    progressBar1.Value = 0;
+                    backgroundWorker1.RunWorkerAsync(_inputParameter);
+                }
+            }
+            
+                  
+
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            List<Table_1> List = ((DataParameter)e.Argument).Table_1list;
+            string fileName = ((DataParameter)e.Argument).fileName; 
+            Microsoft.Office.Interop.Excel.Application Excel = new Microsoft.Office.Interop.Excel.Application();
+            Workbook wb = Excel.Workbooks.Add(XlSheetType.xlWorksheet);
+            Worksheet ws = (Worksheet)Excel.ActiveSheet;
+            Excel.Visible = false;
+
+            int index = 1 ;
+            int Process = List.Count;
+
+            ws.Cells[1, 1] = "Employee_ID";
+            ws.Cells[1, 2] = "Full_Name";
+            ws.Cells[1, 3] = "Job";
+            ws.Cells[1, 4] = "Job_Degree";
+            ws.Cells[1, 5] = "Job_Stage";
+            ws.Cells[1, 6] = "Graduate";
+            ws.Cells[1, 7] = "Place_of_Graduate";
+            ws.Cells[1, 8] = "Sex";
+            ws.Cells[1, 9] = "First_job_Date ";
+            ws.Cells[1, 10] = "Department";
+            ws.Cells[1, 11] = "Class";
+            ws.Cells[1, 12] = "Working_Years";
+            ws.Cells[1, 13] = "salary";
+            ws.Cells[1, 14] = "Place_Of_working";
+            ws.Cells[1, 15] = "leveles";
+
+
+            foreach ( Table_1 t in List)
+            {
+                if (!backgroundWorker1.CancellationPending)
+                {
+                    backgroundWorker1.ReportProgress(index ++ * 100 / Process);
+                    ws.Cells[index,1] = t.Employee_ID.ToString();
+                    ws.Cells[index,2] = t.Full_Name;
+                    ws.Cells[index,3] = t.Job;
+                    ws.Cells[index,4] = t.Job_Degree.ToString();
+                    ws.Cells[index,5] = t.Job_Stage.ToString();
+                    ws.Cells[index,6] = t.Graduate;
+                    ws.Cells[index,7] = t.Place_of_Graduate;
+                    ws.Cells[index,8] = t.Sex;
+                    ws.Cells[index,9] = t.First_job_Date.ToString();
+                    ws.Cells[index,10] = t.Department;
+                    ws.Cells[index,11] = t.Class;
+                    ws.Cells[index,12] = t.Working_Years.ToString();
+                    ws.Cells[index,13] = t.salary.ToString();
+                    ws.Cells[index,14] = t.Place_Of_working;
+                    ws.Cells[index,15] = t.leveles;
+
+
+                }
+            }
+            ws.SaveAs(fileName, XlFileFormat.xlWorkbookDefault, Type.Missing, true, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing,Type.Missing);
+            Excel.Quit();
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            progressBar1.Value = e.ProgressPercentage;
+            lblstate.Text = string.Format("Processing .... {0}", e.ProgressPercentage);
+            progressBar1.Update();
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            if (e.Error==null)
+            {
+                Thread.Sleep(100);
+                lblstate.Text = "Your Data Exported";
             }
         }
     }

@@ -10,5 +10,8 @@
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
       <Value Profile="(Default)">Data Source=DESKTOP-U9D8BHS\YASIR;Initial Catalog=INFOEMP;Integrated Security=True</Value>
     </Setting>
+    <Setting Name="pathOfTheme" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

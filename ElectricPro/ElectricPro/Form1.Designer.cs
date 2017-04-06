@@ -69,8 +69,9 @@
             this.salaryDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.placeOfworkingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.levelesDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.table1BindingSource5 = new System.Windows.Forms.BindingSource(this.components);
+            this.table1BindingSource6 = new System.Windows.Forms.BindingSource(this.components);
             this.iNFOEMPDataSet = new ElectricPro.INFOEMPDataSet();
+            this.table1BindingSource5 = new System.Windows.Forms.BindingSource(this.components);
             this.table1BindingSource4 = new System.Windows.Forms.BindingSource(this.components);
             this.table1BindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.table1BindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -104,12 +105,18 @@
             this.table1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.table1BindingSource3 = new System.Windows.Forms.BindingSource(this.components);
             this.button3 = new System.Windows.Forms.Button();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.table1TableAdapterBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lblstate = new System.Windows.Forms.Label();
             this.skinEngine1 = new Sunisoft.IrisSkin.SkinEngine(((System.ComponentModel.Component)(this)));
             this.groupBox7.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iNFOEMPDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).BeginInit();
@@ -119,6 +126,7 @@
             this.groupBox5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1TableAdapterBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox7
@@ -334,6 +342,8 @@
             // 
             // dgv
             // 
+            this.dgv.AllowUserToAddRows = false;
+            this.dgv.AllowUserToDeleteRows = false;
             this.dgv.AutoGenerateColumns = false;
             this.dgv.BackgroundColor = System.Drawing.Color.Blue;
             this.dgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -353,8 +363,8 @@
             this.salaryDataGridViewTextBoxColumn,
             this.placeOfworkingDataGridViewTextBoxColumn,
             this.levelesDataGridViewTextBoxColumn});
-            this.dgv.DataSource = this.table1BindingSource5;
-            this.dgv.Location = new System.Drawing.Point(9, 275);
+            this.dgv.DataSource = this.table1BindingSource6;
+            this.dgv.Location = new System.Drawing.Point(13, 275);
             this.dgv.Margin = new System.Windows.Forms.Padding(4);
             this.dgv.MultiSelect = false;
             this.dgv.Name = "dgv";
@@ -467,15 +477,20 @@
             this.levelesDataGridViewTextBoxColumn.Name = "levelesDataGridViewTextBoxColumn";
             this.levelesDataGridViewTextBoxColumn.ReadOnly = true;
             // 
-            // table1BindingSource5
+            // table1BindingSource6
             // 
-            this.table1BindingSource5.DataMember = "Table_1";
-            this.table1BindingSource5.DataSource = this.iNFOEMPDataSet;
+            this.table1BindingSource6.DataMember = "Table_1";
+            this.table1BindingSource6.DataSource = this.iNFOEMPDataSet;
             // 
             // iNFOEMPDataSet
             // 
             this.iNFOEMPDataSet.DataSetName = "INFOEMPDataSet";
             this.iNFOEMPDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // table1BindingSource5
+            // 
+            this.table1BindingSource5.DataMember = "Table_1";
+            this.table1BindingSource5.DataSource = this.iNFOEMPDataSet;
             // 
             // table1BindingSource4
             // 
@@ -724,6 +739,7 @@
             this.btnExelSeave.TabIndex = 48;
             this.btnExelSeave.Text = "حفظ البيانات بصيغة اكسل";
             this.btnExelSeave.UseVisualStyleBackColor = true;
+            this.btnExelSeave.Click += new System.EventHandler(this.btnExelSeave_Click);
             // 
             // btnDelete
             // 
@@ -767,6 +783,7 @@
             this.btnNew.TabIndex = 48;
             this.btnNew.Text = "جديد";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click_1);
             // 
             // table_1TableAdapter
             // 
@@ -792,10 +809,36 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(553, 583);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(510, 23);
+            this.progressBar1.TabIndex = 72;
+            // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // table1TableAdapterBindingSource
+            // 
+            this.table1TableAdapterBindingSource.DataSource = typeof(ElectricPro.INFOEMPDataSetTableAdapters.Table_1TableAdapter);
+            // 
+            // lblstate
+            // 
+            this.lblstate.AutoSize = true;
+            this.lblstate.Location = new System.Drawing.Point(1070, 586);
+            this.lblstate.Name = "lblstate";
+            this.lblstate.Size = new System.Drawing.Size(33, 19);
+            this.lblstate.TabIndex = 73;
+            this.lblstate.Text = "0%";
+            // 
             // skinEngine1
             // 
-            this.skinEngine1.DisabledMenuFontColor = System.Drawing.SystemColors.GrayText;
-            this.skinEngine1.InactiveCaptionColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.skinEngine1.SerialNumber = "";
             this.skinEngine1.SkinFile = null;
             // 
@@ -804,7 +847,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1133, 595);
+            this.ClientSize = new System.Drawing.Size(1133, 611);
+            this.Controls.Add(this.lblstate);
+            this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.groupBox6);
@@ -827,7 +872,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "بيانات موظفي دائرة توزيع كهرباء الرمادي";
@@ -837,8 +881,9 @@
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.iNFOEMPDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource)).EndInit();
@@ -850,6 +895,7 @@
             this.groupBox5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.table1BindingSource3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.table1TableAdapterBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -908,6 +954,17 @@
         private System.Windows.Forms.BindingSource table1BindingSource;
         private INFOEMPDataSetTableAdapters.Table_1TableAdapter table_1TableAdapter;
         private System.Windows.Forms.BindingSource table1BindingSource1;
+        private System.Windows.Forms.BindingSource table1BindingSource2;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.BindingSource table1BindingSource4;
+        private System.Windows.Forms.BindingSource table1BindingSource3;
+        private System.Windows.Forms.BindingSource table1BindingSource5;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.DataGridViewTextBoxColumn employeeIDDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn fullNameDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn jobDataGridViewTextBoxColumn;
@@ -923,14 +980,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn salaryDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn placeOfworkingDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn levelesDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource table1BindingSource2;
-        private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnUpdate;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.BindingSource table1BindingSource4;
-        private System.Windows.Forms.BindingSource table1BindingSource3;
-        private System.Windows.Forms.BindingSource table1BindingSource5;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.BindingSource table1BindingSource6;
+        private System.Windows.Forms.BindingSource table1TableAdapterBindingSource;
+        private System.Windows.Forms.Label lblstate;
         private Sunisoft.IrisSkin.SkinEngine skinEngine1;
     }
 }

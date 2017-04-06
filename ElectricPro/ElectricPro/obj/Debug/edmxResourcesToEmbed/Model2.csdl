@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INFOEMPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Table_1">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="Int32" Nullable="false" />
+    <Property Name="Full_Name" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+    <Property Name="Job" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Job_Degree" Type="Int32" />
+    <Property Name="Job_Stage" Type="Int32" />
+    <Property Name="Graduate" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Place_of_Graduate" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="First_job_Date" Type="DateTime" Precision="3" />
+    <Property Name="Department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Class" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Working_Years" Type="Int32" />
+    <Property Name="salary" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Place_Of_working" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="leveles" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_11" Relationship="Self.FK_Table_1_Table_1" FromRole="Table_1" ToRole="Table_11" />
+    <NavigationProperty Name="Table_12" Relationship="Self.FK_Table_1_Table_1" FromRole="Table_11" ToRole="Table_1" />
+    <NavigationProperty Name="Table_2" Relationship="Self.FK_Table_2_Table_1" FromRole="Table_1" ToRole="Table_2" />
+  </EntityType>
+  <EntityType Name="Table_2">
+    <Key>
+      <PropertyRef Name="Information_ID" />
+    </Key>
+    <Property Name="Information_ID" Type="Int32" Nullable="false" />
+    <Property Name="Full_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Birth_Date" Type="DateTime" Precision="3" />
+    <Property Name="Birth_Place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name_of_presonal_card_Office" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Number_Of_File_Card" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Number_Of_Page_Card" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Card_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Card_Issuse_Date" Type="DateTime" Precision="3" />
+    <Property Name="Sertificate_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Sertificate_Issuse_Date" Type="DateTime" Precision="3" />
+    <Property Name="Marride_State" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Wife_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="boys_Number" Type="Int32" />
+    <Property Name="Daughter_Number" Type="Int32" />
+    <Property Name="Total_Children" Type="Int32" />
+    <Property Name="Food_Card_Number" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Food_Card_Issuse" Type="DateTime" Precision="3" />
+    <Property Name="Gavernatore" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Relajon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Street" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="House" Type="Int32" />
+    <Property Name="Mobile_Number" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="E_Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Table_1" Relationship="Self.FK_Table_2_Table_1" FromRole="Table_2" ToRole="Table_1" />
+    <NavigationProperty Name="Table_21" Relationship="Self.FK_Table_2_Table_2" FromRole="Table_2" ToRole="Table_21" />
+    <NavigationProperty Name="Table_22" Relationship="Self.FK_Table_2_Table_2" FromRole="Table_21" ToRole="Table_2" />
+  </EntityType>
+  <Association Name="FK_Table_1_Table_1">
+    <End Role="Table_1" Type="Self.Table_1" Multiplicity="1" />
+    <End Role="Table_11" Type="Self.Table_1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table_1">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Table_11">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_2_Table_1">
+    <End Role="Table_1" Type="Self.Table_1" Multiplicity="1" />
+    <End Role="Table_2" Type="Self.Table_2" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table_1">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Table_2">
+        <PropertyRef Name="Information_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_2_Table_2">
+    <End Role="Table_2" Type="Self.Table_2" Multiplicity="1" />
+    <End Role="Table_21" Type="Self.Table_2" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table_2">
+        <PropertyRef Name="Information_ID" />
+      </Principal>
+      <Dependent Role="Table_21">
+        <PropertyRef Name="Information_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="INFOEMPEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Table_1" EntityType="Self.Table_1" />
+    <EntitySet Name="Table_2" EntityType="Self.Table_2" />
+    <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
+      <End Role="Table_1" EntitySet="Table_1" />
+      <End Role="Table_11" EntitySet="Table_1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_2_Table_1" Association="Self.FK_Table_2_Table_1">
+      <End Role="Table_1" EntitySet="Table_1" />
+      <End Role="Table_2" EntitySet="Table_2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_2_Table_2" Association="Self.FK_Table_2_Table_2">
+      <End Role="Table_2" EntitySet="Table_2" />
+      <End Role="Table_21" EntitySet="Table_2" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

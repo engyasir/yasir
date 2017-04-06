@@ -1,7 +1,6 @@
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\ElectricPro.exe.config
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\ElectricPro.exe
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\ElectricPro.pdb
-E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.csprojResolveAssemblyReference.cache
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.Form1.resources
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.Properties.Resources.resources
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.csproj.GenerateResource.Cache
@@ -9,3 +8,9 @@ E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\Elect
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.pdb
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.Frm2.resources
 E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\IrisSkin2.dll
+E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\EntityFramework.dll
+E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\EntityFramework.SqlServer.dll
+E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\EntityFramework.xml
+E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\bin\Debug\EntityFramework.SqlServer.xml
+E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.csprojResolveAssemblyReference.cache
+E:\دروس سي شارب تطبيقية\ElectricPro\ElectricPro\obj\Debug\ElectricPro.FRM_THEME.resources

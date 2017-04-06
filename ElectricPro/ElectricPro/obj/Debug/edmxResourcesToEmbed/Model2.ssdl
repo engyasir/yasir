@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INFOEMPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Table_1">
+    <Key>
+      <PropertyRef Name="Employee_ID" />
+    </Key>
+    <Property Name="Employee_ID" Type="int" Nullable="false" />
+    <Property Name="Full_Name" Type="nvarchar" MaxLength="80" />
+    <Property Name="Job" Type="nvarchar" MaxLength="50" />
+    <Property Name="Job_Degree" Type="int" />
+    <Property Name="Job_Stage" Type="int" />
+    <Property Name="Graduate" Type="nvarchar" MaxLength="100" />
+    <Property Name="Place_of_Graduate" Type="nvarchar" MaxLength="50" />
+    <Property Name="Sex" Type="nvarchar" MaxLength="50" />
+    <Property Name="First_job_Date" Type="datetime" />
+    <Property Name="Department" Type="nvarchar" MaxLength="50" />
+    <Property Name="Class" Type="nvarchar" MaxLength="50" />
+    <Property Name="Working_Years" Type="int" />
+    <Property Name="salary" Type="money" />
+    <Property Name="Place_Of_working" Type="nvarchar" MaxLength="50" />
+    <Property Name="leveles" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table_2">
+    <Key>
+      <PropertyRef Name="Information_ID" />
+    </Key>
+    <Property Name="Information_ID" Type="int" Nullable="false" />
+    <Property Name="Full_Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Birth_Date" Type="datetime" />
+    <Property Name="Birth_Place" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name_of_presonal_card_Office" Type="nvarchar" MaxLength="50" />
+    <Property Name="Number_Of_File_Card" Type="nvarchar" MaxLength="20" />
+    <Property Name="Number_Of_Page_Card" Type="nvarchar" MaxLength="50" />
+    <Property Name="Card_Number" Type="nvarchar" MaxLength="20" />
+    <Property Name="Card_Issuse_Date" Type="datetime" />
+    <Property Name="Sertificate_Number" Type="nvarchar" MaxLength="20" />
+    <Property Name="Sertificate_Issuse_Date" Type="datetime" />
+    <Property Name="Marride_State" Type="nvarchar" MaxLength="50" />
+    <Property Name="Wife_Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="boys_Number" Type="int" />
+    <Property Name="Daughter_Number" Type="int" />
+    <Property Name="Total_Children" Type="int" />
+    <Property Name="Food_Card_Number" Type="nvarchar" MaxLength="20" />
+    <Property Name="Food_Card_Issuse" Type="datetime" />
+    <Property Name="Gavernatore" Type="nvarchar" MaxLength="50" />
+    <Property Name="Relajon" Type="nvarchar" MaxLength="50" />
+    <Property Name="Street" Type="nvarchar" MaxLength="50" />
+    <Property Name="House" Type="int" />
+    <Property Name="Mobile_Number" Type="nvarchar" MaxLength="50" />
+    <Property Name="E_Mail" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Table_1_Table_1">
+    <End Role="Table_1" Type="Self.Table_1" Multiplicity="1" />
+    <End Role="Table_11" Type="Self.Table_1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table_1">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Table_11">
+        <PropertyRef Name="Employee_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_2_Table_1">
+    <End Role="Table_1" Type="Self.Table_1" Multiplicity="1" />
+    <End Role="Table_2" Type="Self.Table_2" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table_1">
+        <PropertyRef Name="Employee_ID" />
+      </Principal>
+      <Dependent Role="Table_2">
+        <PropertyRef Name="Information_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Table_2_Table_2">
+    <End Role="Table_2" Type="Self.Table_2" Multiplicity="1" />
+    <End Role="Table_21" Type="Self.Table_2" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table_2">
+        <PropertyRef Name="Information_ID" />
+      </Principal>
+      <Dependent Role="Table_21">
+        <PropertyRef Name="Information_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="INFOEMPModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_1" EntityType="Self.Table_1" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table_2" EntityType="Self.Table_2" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Table_1_Table_1" Association="Self.FK_Table_1_Table_1">
+      <End Role="Table_1" EntitySet="Table_1" />
+      <End Role="Table_11" EntitySet="Table_1" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_2_Table_1" Association="Self.FK_Table_2_Table_1">
+      <End Role="Table_1" EntitySet="Table_1" />
+      <End Role="Table_2" EntitySet="Table_2" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Table_2_Table_2" Association="Self.FK_Table_2_Table_2">
+      <End Role="Table_2" EntitySet="Table_2" />
+      <End Role="Table_21" EntitySet="Table_2" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

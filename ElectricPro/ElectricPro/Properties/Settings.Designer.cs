@@ -33,5 +33,17 @@ namespace ElectricPro.Properties {
                 return ((string)(this["INFOEMPConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string pathOfTheme {
+            get {
+                return ((string)(this["pathOfTheme"]));
+            }
+            set {
+                this["pathOfTheme"] = value;
+            }
+        }
     }
 }
